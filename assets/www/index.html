@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html style="background-color:#222;">
+	<head>
+		<title>Volcoholic</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/ico.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+		<script src="js/jquery.js"></script>
+		<script src="js/tmpl.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+        <script src="js/cordova-min.js"></script>
+		<script src="js/volcoholic.js"></script>
+	</head>
+	<body onload="onLoad();" >
+        <div id="header">
+            <div id="header_text">Volcoholic</div>
+        </div>
+        <div id="table"></div>
+        <div id="menu_header">
+            <img id="imgup" src="image/up.png"/>
+            <img id="imgdown" src="image/down.png"/>
+        </div>
+        <div id="menu">
+            <div id="unit" class="submenu">
+                <img src="image/units.png"/>
+                <div id="units">
+                </div>
+                <div id="add">
+                    <img id="add_button" src="image/plus.png"/>
+                </div>
+            </div>
+            <div id="vol" class="submenu">
+                <div class="left">
+                    <img src="image/vol.png"/>
+                    <div id="vol_inc" class="slider_inc"></div>
+                    <div id="slider_one_value" class="slide_value"></div>
+                    <div id="vol_dec" class="slider_dec"></div>                
+                </div>
+                <div class="right">
+                    <div class="buffer"></div>
+                    <input type="range" target="slider_one_value" name="slider-1" id="slider-1" value="500" min="10" max="990" step="10"/>
+                </div>
+            </div>
+            <div id="qua" class="submenu">
+                <div class="left">
+                    <img src="image/qua.png"/>
+                    <div id="qua_inc" class="slider_inc"></div>
+                    <div id="slider_two_value" class="slide_value"></div>
+                    <div id="qua_dec" class="slider_dec"></div>
+                </div> 
+                <div class="right">
+                    <div class="buffer"></div>
+                    <input type="range" target="slider_two_value" name="slider-2" id="slider-2" value="6" min="1" max="48" step="1"/>
+                </div>                    
+            </div>
+            <div id="str" class="submenu">
+                <div class="left">
+                    <img src="image/str.png"/>
+                    <div id="str_inc" class="slider_inc"></div>
+                    <div id="slider_three_value" class="slide_value"></div>
+                    <div id="str_dec" class="slider_dec"></div>
+                </div>
+                <div class="right">
+                    <div class="buffer"></div>                
+                    <input type="range" target="slider_three_value" name="slider-3" id="slider-3" value="4.5" min="0.1" max="60" step="0.1"/>
+                </div>                
+            </div>
+            <div id="cos" class="submenu">
+                <div class="left">           
+                    <img src="image/cos.png"/>
+                    <div id="cos_inc" class="slider_inc"></div>
+                    <div id="slider_four_value" class="slide_value"></div>
+                    <div id="cos_dec" class="slider_dec"></div>
+                </div>
+                <div class="right">
+                    <div id="cost_buffer" class="buffer"></div>
+                    <input type="range" target="slider_four_value" name="slider-4" id="slider-4" value="10" min="0.1" max="50" step="0.1"/>
+                </div>                
+            </div>
+        </div>
+	</body>
+</html>
+
+<script id="drink_placeholder_tmpl" type="text/x-jquery-tmpl">
+    <div id="placeholder">
+        <div>Add drinks using the menu below.</div>
+        <div>They will be ordered by best booze value.</div>
+        <div class="placeholder_arrow icon-arrow-down"></div>
+    </div>
+</script>
+
+<script id="drink_header_small_tmpl" type="text/x-jquery-tmpl">
+    <div id="drink_header">
+        <div id="space"></div>
+        <div id="head_vol" class="small">Volume</div>
+        <div id="head_str" class="small">Strength</div>
+        <div id="head_qua" class="small">Quantity</div>
+    </div>
+</script>
+
+<script id="units_small" type="text/x-jquery-tmpl">
+   <input type="radio" value="ml" id="radio1" name="radio"/><label for="radio1">ml</label>
+   <input type="radio" value="cl" id="radio2" name="radio" checked="checked"/><label for="radio2">cl</label>
+   <input type="radio" value="l" id="radio3" name="radio"/><label for="radio3">l</label>
+</script>
+
+<script id="units_big" type="text/x-jquery-tmpl">
+   <input type="radio" value="ml" id="radio1" name="radio"/><label for="radio1">ml</label>
+   <input type="radio" value="cl" id="radio2" name="radio" checked="checked"/><label for="radio2">cl</label>
+   <input type="radio" value="l" id="radio3" name="radio"/><label for="radio3">l</label>
+   <input type="radio" value="oz" id="radio4" name="radio"/><label for="radio4">oz</label>
+</script>
+
+<script id="drink_tmpl" type="text/x-jquery-tmpl">
+    <div class="drink {{if zebra}}zebra{{/if}}">
+        {{if best}}
+			<img class="img_best"src="image/best.png"/>
+		{{/if}}
+		<div class="volume">
+            {{if drink.unit == "l"}}
+                ${parseFloat(drink.volume).toFixed(1).toString()} ${capitalise(drink.unit)}
+            {{else}}
+                ${parseInt(drink.volume).toString()} ${capitalise(drink.unit)}
+            {{/if}}
+        </div>
+		<div class="sub_info">
+			<div class="strength">${drink.strength}%</div>
+           	<div class="quantity">x${drink.quantity}</div>
+           	<div class="cost">@${drink.cost}</div>
+			<div class="rank">Rank: #${count}</div>
+        </div>
+    </div>
+    <span class="delete icon-x" index="${count}"></span>
+</script>

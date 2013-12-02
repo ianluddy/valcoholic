@@ -1,0 +1,327 @@
+/* Body */
+@font-face {
+    font-family:'seg';
+    src: url('../font/Segoe_UI.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+ 	-webkit-touch-callout: none !important;
+    -webkit-text-size-adjust: none !important;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	outline: none;
+}
+body{
+	font-size: 25px;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	overflow: hidden;
+    -webkit-transition: none; 
+    -moz-transition: none;
+    font-family: seg;
+}
+
+/* Min width */
+#table, #menu, #drink_header{
+    min-width: 240px;
+}
+
+/* Table */
+#table{
+	width: 100%;
+	position: absolute;
+	top: 56px;
+	bottom: 57px;
+	z-index: 1;
+    background-color: #777;
+    background-image: url("../image/pattern.png");
+    overflow: auto;
+}
+#placeholder{
+    width: 100%;
+    height: 90px;
+    color: #bbb;
+    position: absolute;
+    top: 40%;
+    font-size: 15px;
+    text-shadow: 1px 1px #000;
+}
+#placeholder > div{
+    text-align: center;
+    font-weight: bold;
+}
+#placeholder img{
+    position: relative;
+    top: 10px;
+}
+#placeholder .placeholder_arrow{
+    font-size: 30px;
+    margin-top: 15px;
+}
+
+/* Table Header */
+#spacer{
+    height: 33px;
+}
+#drink_header{
+    height: 25px;
+    background-color: #222;
+    color: #555;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    margin-bottom: 1px;
+    position: absolute;
+    top: 65px;
+    left: 0px;
+    right: 0px;
+    z-index: 120;
+    border-bottom: 1px solid;
+    font-weight: bold;
+}
+#drink_header div{
+    display: inline-block;
+    width: 20%;
+    text-align: left;
+}
+#drink_header .small{
+    display: inline-block;
+    width: 25%;
+    text-align: left;
+}
+#drink_header #space{
+    width: 5%;
+}
+#drink_header{
+    display: none;
+}
+
+/* Drink */
+.drink{
+    margin-bottom: 1px;
+    height: 50px;
+    background-color: #444;
+    font-size: 16px;
+    opacity: 0.7;
+    font-weight: bold;
+    padding-left: 31px;
+}
+.drink .img_best{
+	position: absolute;
+	left: 2px;
+}
+.drink.zebra{
+    background-color: #555;
+}
+#table .delete{
+    display: inline-block;
+    float: right;
+    position: relative;
+    top: -40px;
+    padding: 5px;
+    color: #e60041;
+    opacity: 0.6;
+    font-size: 20px;
+}
+.drink .volume{
+	top: 0px;
+	font-size: 21px;
+	letter-spacing: 1px;
+	height: 32px;
+}
+.drink .best_value{
+	display: inline-block;
+	margin-bottom: 30px;
+	position: relative;
+	bottom: 19px;
+	left: 20px;
+	color: #e60041;
+}
+.drink .sub_info{
+	float: left;
+	height: 18px;
+	position: relative;
+	bottom: 5px;
+}
+.drink .sub_info > div{
+	display: inline-block;
+	font-weight: normal;
+	margin-right: 5px;
+}
+.drink .sub_info > .rank{
+	color: #aaa;
+	margin-left: 10px;
+}
+/* Header */
+#header{
+	position: absolute;
+	width: 100%;
+	top: 0px;
+    height: 52px;
+	border-bottom: 3px solid #e60041;
+	text-indent: 2px;
+    background-color: #222;
+}
+#header_text{
+	position: absolute;
+	color: #bbb;
+	font-size: 23px;
+	top: 10px;
+	left: 15px;
+	letter-spacing: 1px;
+}
+#header_image{
+    position: absolute;
+    top: 6px;
+}
+
+
+/* Menu Header*/
+#imgdown{
+    display: none;
+}
+#imgdown, #imgup{
+    position: absolute;
+    top: 0px;
+}
+#menu_header{
+	width: 100%;
+	bottom: 0px;
+    height: 52px;
+	position: absolute;
+	z-index: 10;
+    background-color: #222;
+    border: none;
+	border-top: 3px solid #e60041;
+    text-indent: 2px;    
+}
+
+/* Menu */
+#menu{
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+    height: 330px;
+	z-index: 10;
+    display: none;
+    border: none;
+    border-top: 3px solid #e60041;
+    background-color: #222;
+    background-image: url("../image/pattern2.png"); 
+}
+#unit{
+    top: 0%;
+    bottom: 80%;
+}
+#vol{
+    top: 20%;
+    bottom: 60%;
+}
+#qua{
+    top: 40%;
+    bottom: 40%;
+}
+#str{
+    top: 60%;
+    bottom: 20%;
+}
+#cos{
+    top: 80%;
+    bottom: 0%;
+}
+.submenu{
+    width: 100%;
+	font-size: 15px;
+    border-bottom: 1px solid #000;
+    position: absolute;
+}
+.submenu > .left{
+    position: absolute;
+    left: 0%;
+    height: 100%;
+    width: 100px;
+    border-right: 1px solid #222;
+}
+.submenu > .left > img, #unit > img{
+    margin-left: 5px;
+    height: 58px;
+    margin-top: 3px;
+    border-right: 1px solid #222;
+}
+.submenu > .right{
+    position: absolute;
+    left: 102px;
+    right: 0px;
+    height: 100%;
+}
+.submenu > .right > input{
+    position: absolute;
+    width: 93%;
+    left: 2%;
+    height: 50%;
+    top: 25%;
+    z-index: 1;
+}
+.buffer{
+    position: absolute;
+    opacity: 0.0;
+    z-index: 10;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 18px;
+}
+.slide_value{
+    position: absolute;
+    font-size: 16px;
+    left: 30px;
+    text-align: center;
+    right: 0px;
+    top: 0px;
+    bottom: 30px;
+    vertical-align: middle;
+    line-height: 37px;
+    color: #bbb;
+    font-weight: bold;
+}
+.slider_inc{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    bottom: 5px;
+    left: 67px;
+    background-image: url("../image/slider_inc.png");
+}
+.slider_dec{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    bottom: 5px;
+    left: 32px;
+    background-image: url("../image/slider_dec.png");
+}
+#add{
+    width: 60px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    padding-left: 2px;
+}
+#add > img{
+    position: relative;
+    top: 3px;
+    left: -1px;
+}
+#units{
+    position: absolute;
+    left: 30px;
+    top: 16px;
+}
