@@ -129,6 +129,10 @@
            	<div class="cost">@${drink.cost}</div>
 			<div class="rank">Rank: #${count}</div>
         </div>
+        <div class="alc_info">
+            <div class="alc_mils">${drink.alcohol_in_mils}ml of Alcohol</div>
+            <div class="alc_bar" style="width:${alc}%"></div>
+        </div>
     </div>
     <span class="delete icon-x" index="${count}"></span>
 </script>

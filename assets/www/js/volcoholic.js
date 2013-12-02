@@ -6,6 +6,7 @@ var quastep, volstep, strstep, cosstep;
 var unit = "ml";
 var placeholder, cost_buffer;
 var drinks = [];
+var max_alcohol_mils = 0;
 var width_step = 325;
 var units = {
     "ml"  :{"max":990,"step":10,"min":10},
@@ -176,8 +177,15 @@ function add(){
         drink.volume = parseFloat($(vol).val()).toFixed(1);
         drink.cost = parseFloat(parseFloat($(cos).val()).toFixed(1).toString() + "0").toFixed(2);
         drink.quantity = parseInt($(qua).val());
-        drink.index = _calculate_booze_index(drink);
-        
+
+        // Calc
+        calculations = _calculate_booze_index(drink);
+        drink.index = calculations["booze_index"];
+        drink.alcohol_in_mils = calculations["alcohol_in_mils"];
+        if( max_alcohol_mils < drink.alcohol_in_mils ){
+            max_alcohol_mils = drink.alcohol_in_mils;
+        }
+
         // Add to array and sort
         drinks.push(drink);
         drinks.sort(function(a,b){return b.index-a.index});
@@ -188,9 +196,13 @@ function add(){
 function delete_drink(){
     var index = parseInt($(this).attr("index")) - 1;
     var temp = [];
+    max_alcohol_mils = 0;
     for(var i = 0;i < drinks.length;i++){
         if( index != i.toString() ){
             temp.push(drinks[i]);
+            if( max_alcohol_mils < drinks[i].alcohol_in_mils ){
+                max_alcohol_mils = drink.alcohol_in_mils;
+            }
         }
     }
     drinks = temp;
@@ -208,7 +220,8 @@ function _draw(){
                 "drink":drink,
                 "zebra":count%2==0,
                 "best" :count==1,
-                "count":count
+                "count":count,
+                "alc":drink.alcohol_in_mils/max_alcohol_mils
             }).appendTo(table);
             count++;        
         }
@@ -221,7 +234,7 @@ function _draw(){
 function _calculate_booze_index(drink){
     var mils = _calclate_total_volume_in_ml(drink.unit,drink.volume,drink.quantity);
     var alc = (mils/100)*drink.strength;
-    return alc/drink.cost;
+    return {"booze_index" : alc/drink.cost, "alcohol_in_mils" : mils };
 }
 
 function _calclate_total_volume_in_ml(unit,volume,quantity){
