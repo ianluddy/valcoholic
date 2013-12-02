@@ -106,16 +106,19 @@ body{
 /* Drink */
 .drink{
     margin-bottom: 1px;
-    height: 50px;
+    height: 65px;
     background-color: #444;
     font-size: 16px;
     opacity: 0.7;
     font-weight: bold;
     padding-left: 31px;
+    padding-bottom: 7px;
+    padding-right: 30px;
 }
 .drink .img_best{
 	position: absolute;
 	left: 2px;
+	top: 10px;
 }
 .drink.zebra{
     background-color: #555;
@@ -124,7 +127,7 @@ body{
     display: inline-block;
     float: right;
     position: relative;
-    top: -40px;
+    top: -50px;
     padding: 5px;
     color: #e60041;
     opacity: 0.6;
@@ -144,20 +147,41 @@ body{
 	left: 20px;
 	color: #e60041;
 }
-.drink .sub_info{
-	float: left;
-	height: 18px;
+.drink .sub_info, .drink .alc_info{
 	position: relative;
-	bottom: 5px;
+	bottom: 5px;	
+}
+.drink .sub_info{
+	height: 18px;	
 }
 .drink .sub_info > div{
 	display: inline-block;
 	font-weight: normal;
-	margin-right: 5px;
+	margin-right: 5px;	
 }
-.drink .sub_info > .rank{
+.drink .alc_info{
+	font-weight: normal;
+	font-size: 16px;
+	display: inline-block;
+}
+.drink .alc_mils{
+	z-index: 1;	
+}
+.drink .alc_bar{
+	background: #222;
+	height: 2px;
+	position: relative;
+	bottom: 8px;
+}
+.drink .rank{
 	color: #aaa;
-	margin-left: 10px;
+	float: left;
+	display: inline-block;
+	position: relative;
+	right: 29px;
+	width: 0px;
+	bottom: -24px;
+	font-weight: normal;	
 }
 /* Header */
 #header{

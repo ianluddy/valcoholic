@@ -115,6 +115,8 @@
     <div class="drink {{if zebra}}zebra{{/if}}">
         {{if best}}
 			<img class="img_best"src="image/best.png"/>
+		{{else}}
+			<div class="rank">#${count}</div>
 		{{/if}}
 		<div class="volume">
             {{if drink.unit == "l"}}
@@ -127,12 +129,11 @@
 			<div class="strength">${drink.strength}%</div>
            	<div class="quantity">x${drink.quantity}</div>
            	<div class="cost">@${drink.cost}</div>
-			<div class="rank">Rank: #${count}</div>
         </div>
         <div class="alc_info">
-            <div class="alc_mils">${drink.alcohol_in_mils}ml of Alcohol</div>
-            <div class="alc_bar" style="width:${alc}%"></div>
+            <div class="alc_mils">Alcohol: ${drink.alcohol_in_mils}ml </div>
         </div>
+		<div class="alc_bar" style="width:${alc}%"></div>
     </div>
     <span class="delete icon-x" index="${count}"></span>
 </script>

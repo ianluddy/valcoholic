@@ -156,7 +156,7 @@ function onLoad(){
     $("#add").click().click().click().click();
     $("#add").click().click().click().click();
     */
-    
+     
     // Ignore click
     $(menu).on("click",function(e){e.preventDefault();});
     $(vol).on("click",function(e){e.preventDefault();});
@@ -167,7 +167,7 @@ function onLoad(){
 
 function add(){
     if(drinks.length < 50){
-        // Vibrate
+        // Vibrate #debug
         navigator.notification.vibrate(50);
         
         // New drink
@@ -181,7 +181,7 @@ function add(){
         // Calc
         calculations = _calculate_booze_index(drink);
         drink.index = calculations["booze_index"];
-        drink.alcohol_in_mils = calculations["alcohol_in_mils"];
+        drink.alcohol_in_mils = parseInt(calculations["alcohol_in_mils"]);
         if( max_alcohol_mils < drink.alcohol_in_mils ){
             max_alcohol_mils = drink.alcohol_in_mils;
         }
@@ -201,7 +201,7 @@ function delete_drink(){
         if( index != i.toString() ){
             temp.push(drinks[i]);
             if( max_alcohol_mils < drinks[i].alcohol_in_mils ){
-                max_alcohol_mils = drink.alcohol_in_mils;
+                max_alcohol_mils = drinks[i].alcohol_in_mils;
             }
         }
     }
@@ -221,7 +221,7 @@ function _draw(){
                 "zebra":count%2==0,
                 "best" :count==1,
                 "count":count,
-                "alc":drink.alcohol_in_mils/max_alcohol_mils
+                "alc":(drink.alcohol_in_mils/max_alcohol_mils)*100
             }).appendTo(table);
             count++;        
         }
@@ -234,7 +234,7 @@ function _draw(){
 function _calculate_booze_index(drink){
     var mils = _calclate_total_volume_in_ml(drink.unit,drink.volume,drink.quantity);
     var alc = (mils/100)*drink.strength;
-    return {"booze_index" : alc/drink.cost, "alcohol_in_mils" : mils };
+    return {"booze_index" : alc/drink.cost, "alcohol_in_mils" : alc };
 }
 
 function _calclate_total_volume_in_ml(unit,volume,quantity){
