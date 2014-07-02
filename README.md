@@ -12,8 +12,5 @@ Maximum liver damage guaranteed!
 ![Alt text](https://github.com/ianluddy/Volcoholic/blob/master/screenshots/volcoholic1.png?raw=true)
 ***
 
-![Alt text](https://github.com/ianluddy/Volcoholic/blob/master/screenshots/volcoholic2.png?raw=true)
-***
-
 ![Alt text](https://github.com/ianluddy/Volcoholic/blob/master/screenshots/volcoholic.png?raw=true)
 ***
