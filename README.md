@@ -7,6 +7,11 @@ Maximum liver damage guaranteed!
 
 ##### https://play.google.com/store/apps/details?id=iandroid.volcoholic
 
+#### Stack
+
+* [Android](http://developer.android.com/index.html/)
+* [Phonegap](http://phonegap.com/)
+
 #### Screenshots
 
 ![Alt text](https://github.com/ianluddy/Volcoholic/blob/master/screenshots/volcoholic1.png?raw=true)
