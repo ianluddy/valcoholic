@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body id="volc" ng-app="starter">
+    <div id="title-wrap">
+      <div id="title-inner">
+          <h1 id="title">Volcoholic</h1>
+          <!--<h4 id="caption">Alcoholic Beverage Comparison</h4>-->
+          <span class="ion-wineglass"></span>
+          <span class="ion-beer"></span>
+          <span class="ion-android-bar"></span>
+      </div>
+    </div>
+    <div id="drinks">
+        <div class="placeholder" ng-controller='MainCtrl' ng-click="openModal()">
+            <span>Add a Drink</span>
+            <span class="ion-plus-circled"></span>
+        </div>
+    </div>
+
+    <script id="contact-modal.html" type="text/ng-template">
+      <div class="modal">
+        <ion-content>
+
+          <div class="modal-close" ng-click="closeModal()">
+              <i class="icon ion-android-close"></i>
+          </div>
+
+          <div class="input-group">
+              <div class="input-label label">Units</div>
+              <div class="button-bar">
+                <a class="button selected">ml</a>
+                <a class="button">cl</a>
+                <a class="button">l</a>
+                <a class="button">oz</a>
+              </div>
+          </div>
+          <div class="input-group">
+              <div class="input-value label">20 ml</div>
+              <div class="input-label label">Volume</div>
+              <div class="item range">
+                  <i class="icon ion-wineglass"></i>
+                  <input type="range" name="volume">
+                  <i class="icon ion-beer"></i>
+              </div>
+          </div>
+          <div class="input-group">
+              <div class="input-value label">x6</div>
+              <div class="input-label label">Quantity</div>
+              <div class="item range">
+                  <i class="icon ion-ios-cart-outline"></i>
+                  <input type="range" name="quantity" min="0" max="1000" value="200">
+                  <i class="icon ion-ios-cart"></i>
+              </div>
+          </div>
+          <div class="input-group">
+              <div class="input-value label">10%</div>
+              <div class="input-label label">Strength</div>
+              <div class="item range">
+                <i class="icon ion-ios-flame-outline"></i>
+                <input type="range" name="volume">
+                <i class="icon ion-ios-flame"></i>
+              </div>
+          </div>
+          <div class="input-group">
+            <div class="input-value label">10.00</div>
+            <div class="input-label label">Cost</div>
+            <div class="item range">
+              <i class="icon ion-android-happy"></i>
+              <input type="range" name="volume" min="0.1" max="50.0" value="25.0">
+              <i class="icon ion-android-sad"></i>
+            </div>
+          </div>
+          <button class="button button-outline button-dark button-full" ng-click="addDrink()">
+            Add
+          </button>
+        </ion-content>
+      </div>
+    </script>
+  </body>
+</html>
