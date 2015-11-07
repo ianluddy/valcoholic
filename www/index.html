@@ -8,10 +8,6 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
@@ -21,7 +17,7 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
-  <body id="volc" ng-app="starter">
+  <body id="volc" ng-app="starter" ng-controller='MainCtrl'>
     <div id="title-wrap">
       <div id="title-inner">
           <h1 id="title">Volcoholic</h1>
@@ -32,9 +28,24 @@
       </div>
     </div>
     <div id="drinks">
-        <div class="placeholder" ng-controller='MainCtrl' ng-click="openModal()">
+        <!--<div id="header" ng-show="drinks_added">-->
+        <div id="header">
+          <div class="cost">Cost</div>
+          <div class="quantity">Quantity</div>
+          <div class="strength">Strength</div>
+          <div class="volume">Volume</div>
+          <div class="best">Best</div>
+        </div>
+        <div id="best" ng-show="drinks_added" class="ion-checkmark-circled"></div>
+
+        <div ng-repeat="drink in drinks" class="drink animated fadeInRight">
+            <div>{{drink.cost}}</div>
+            <div>{{drink.quantity}}</div>
+            <div>{{drink.strength}}</div>
+            <div>{{drink.volume}}</div>
+        </div>
+        <div class="placeholder" ng-click="openModal()">
             <span>Add a Drink</span>
-            <span class="ion-plus-circled"></span>
         </div>
     </div>
 
@@ -56,38 +67,38 @@
               </div>
           </div>
           <div class="input-group">
-              <div class="input-value label">20 ml</div>
+              <div class="input-value label">{{data.volume}}ml</div>
               <div class="input-label label">Volume</div>
               <div class="item range">
                   <i class="icon ion-wineglass"></i>
-                  <input type="range" name="volume">
+                  <input type="range" name="volume" min="0" max="1000" ng-model="data.volume">
                   <i class="icon ion-beer"></i>
               </div>
           </div>
           <div class="input-group">
-              <div class="input-value label">x6</div>
+              <div class="input-value label">x{{data.quantity}}</div>
               <div class="input-label label">Quantity</div>
               <div class="item range">
                   <i class="icon ion-ios-cart-outline"></i>
-                  <input type="range" name="quantity" min="0" max="1000" value="200">
+                  <input type="range" name="quantity" min="0" max="50" ng-model="data.quantity">
                   <i class="icon ion-ios-cart"></i>
               </div>
           </div>
           <div class="input-group">
-              <div class="input-value label">10%</div>
+              <div class="input-value label">{{data.strength}}%</div>
               <div class="input-label label">Strength</div>
               <div class="item range">
                 <i class="icon ion-ios-flame-outline"></i>
-                <input type="range" name="volume">
+                <input type="range" name="strength" min="0" max="100" ng-model="data.strength">
                 <i class="icon ion-ios-flame"></i>
               </div>
           </div>
           <div class="input-group">
-            <div class="input-value label">10.00</div>
+            <div class="input-value label">{{data.cost}}.00</div>
             <div class="input-label label">Cost</div>
             <div class="item range">
               <i class="icon ion-android-happy"></i>
-              <input type="range" name="volume" min="0.1" max="50.0" value="25.0">
+              <input type="range" name="cost" min="0" max="50" ng-model="data.cost">
               <i class="icon ion-android-sad"></i>
             </div>
           </div>
