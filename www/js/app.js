@@ -18,9 +18,9 @@ angular.module('starter', ['ionic'])
   });
 })
 
-.controller('MainCtrl', function($scope, $ionicModal) {
+.controller('DrinkCtrl', function($scope, $ionicModal) {
 
-  $ionicModal.fromTemplateUrl('contact-modal.html', {
+  $ionicModal.fromTemplateUrl('drink-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -54,9 +54,9 @@ angular.module('starter', ['ionic'])
   $scope.newDrink = function(){
     var new_drink = {
         volume: $scope.data.volume,
-        strength: $scope.data.strength,
+        strength: parseFloat($scope.data.strength).toFixed(1),
         quantity: $scope.data.quantity,
-        cost: $scope.data.cost
+        cost: parseFloat($scope.data.cost).toFixed(2)
     }
     $scope.evaluateDrink(new_drink);
     return new_drink;
@@ -64,8 +64,9 @@ angular.module('starter', ['ionic'])
 
   $scope.evaluateDrink = function(drink){
       drink.mils = $scope.normaliseVolume(drink.unit, drink.volume, drink.quantity);
-      drink.alc = (drink.mils/100) * drink.strength;
-      drink.index = drink.alc/drink.cost;
+      var total_alc = (drink.mils/100) * drink.strength;
+      drink.alc = parseFloat(total_alc).toFixed(2);
+      drink.index = parseFloat(total_alc/drink.cost).toFixed(2);
   }
 
   $scope.normaliseVolume = function(unit, volume, quantity){
@@ -81,13 +82,33 @@ angular.module('starter', ['ionic'])
       }
   }
 
-  /* Modal Control */
-
-  $scope.openModal = function() {
+  $scope.openDrinks = function() {
     $scope.modal.show()
   }
 
-  $scope.closeModal = function() {
+  $scope.closeDrinks = function() {
+    $scope.modal.hide();
+  };
+
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+})
+
+.controller('AboutCtrl', function($scope, $ionicModal) {
+
+  $ionicModal.fromTemplateUrl('about-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal
+  })
+
+  $scope.openAbout = function() {
+    $scope.modal.show()
+  }
+
+  $scope.closeAbout = function() {
     $scope.modal.hide();
   };
 

@@ -1,15 +1,22 @@
 /* Empty. Add your own CSS if you like */
 @font-face {
     font-family: 'vol'; /*a name to be used later*/
-    src: url('../fonts/Bebas.ttf'); /*URL to font*/
+    src: url('../fonts/Bebas.ttf');
     /* src: url('../fonts/Bevan.ttf'); */
+}
+@font-face {
+    font-family: 'vol_body';
+    src: url('../fonts/PTSans.ttf');
+    /* src: url('../fonts/DroidSans.ttf'); */
 }
 *{
     background-color: #ffd600 !important;
     color: #444 !important;
+    font-family: vol_body !important;
 }
 #volc{
-    font-family: vol !important;
+    position: absolute;
+    bottom: 0px;
 }
 h1{
     font-size: 2.6em;
@@ -23,39 +30,90 @@ h4{
 }
 #drinks{
     margin-top: 20px;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 70%;
+    border-bottom: 2px solid;
+    overflow: hidden;
+}
+#drink-wrap{
+    height: 90%;
+    overflow: auto;
+    overflow-x: hidden;
 }
 .placeholder{
-    text-transform: uppercase;
-    font-size: 0.8em;
     text-align: center;
-    border: 2px dashed;
     padding: 10px;
+    margin: 5px !important;
+}
+#footer{
+    padding: 10px;
+    font-size: 1em;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+#about{
+    float: right;
+    text-align: right;
+}
+#about strong{
+    margin-bottom: 5px;
+}
+.about-header{
+    margin-bottom: 5px;
+}
+.about-section{
+    margin-top: 15px;
+}
+#about-wrap{
+    text-align: center;
+    padding: 20px;
+    font-size: 1.3em;
+}
+#about-wrap strong{
+    margin-bottom: 10px;
+}
+#about-wrap a{
+    text-decoration: none;
+}
+#about-wrap img{
+    border-radius: 100px;
+    border: 7px solid;
+    clear: both;
+}
+#info{
+    float: left;
+    text-align: left;
+}
+#info span, #about span{
+    font-size: 1.4em;
+    margin-right: 4px;
+    margin-left: 4px;
+    position: relative;
+    top: 2px;
 }
 #title-wrap span{
     font-size: 1.5em;
     padding: 3px;
 }
 #title-wrap{
-    margin-top: 35px;
+    margin-top: 6%;
     text-align: center;
+    height: 12%;
 }
 #title-inner{
     margin: 0 auto;
 }
 .modal{
   margin-top: 12px;
-  /*border-top: 8px solid #000;*/
 }
 .modal ion-content{
     padding: 20px;
-    padding-top: 20px;
+    padding-top: 40px;
     padding-bottom: 10px;
 }
 .modal ion-content .button-full{
     border: 1px solid;
-    font-family: vol !important;
 }
 .input-value{
     float: right;
@@ -63,11 +121,13 @@ h4{
     color: #444;
     position: relative;
     top: 6px;
-    right: 5px;
+    right: 15px;
 }
 .input-label{
     margin-bottom: 4px;
     z-index: 2;
+    position: relative;
+    left: 10px;
 }
 .input-group{
     z-index: 1;
@@ -90,20 +150,21 @@ h4{
 }
 .modal-close{
     position: absolute;
-    top: -23px;
-    right: 0px;
+    top: -40px;
+    right: 10px;
     font-size: 2.5em;
 }
-.drink{
+.drink, .placeholder{
     height: 40px;
-    margin-bottom: 5px;
-    line-height: 35px;
-    font-size: 1.2em;
-    background-color: #ffe700 !important
+    margin: 1px !important;
+    padding-right: 2%;
+    width: 99%;
+    margin-top: 5px !important;
 }
-.drink div{
-    float: left;
-    background-color: #ffe700 !important
+.drink div, .placeholder div{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 #header{
     width: 100%;
@@ -115,13 +176,46 @@ h4{
 #header div, .drink div{
     display: inline-block;
     float: right;
-    width: 20%;
+    width: 16%;
     text-align: center;
 }
-#best{
-    position: absolute;
-    left: 16%;
-    top: 26%;
-    font-size: 2em;
-    background-color: #ffe700 !important
+/* responsive */
+
+@media screen and (min-width: 350px) {
+    .alc{
+        display: none !important;
+    }
+    #header div, .drink div{
+        width: 20%;
+    }
+}
+@media screen and (max-width: 350px) {
+    .alc{
+        display: none !important;
+    }
+    #header div, .drink div{
+        width: 20%;
+    }
+    #about{
+        display: none;
+    }
+}
+@media screen and (max-width: 300px) {
+    .cost{
+        display: none !important;
+    }
+    #header div, .drink div{
+        width: 25%;
+    }
+    #footer{
+        display: none;
+    }
+}
+@media screen and (max-height: 450px) {
+    #footer{
+        display: none;
+    }
+    #title-inner span{
+        display: none;
+    }
 }
