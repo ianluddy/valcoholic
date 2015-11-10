@@ -28,16 +28,19 @@ angular.module('starter', ['ionic'])
   })
 
   $scope.data = {
-    "volume": 20,
+    "volume": 500,
     "quantity": 6,
     "strength": 6,
     "cost": 10,
+    "unit": "ml"
   }
 
   $scope.drinks = [];
   $scope.drinks_added = false;
 
-  /* Drink Functions */
+  $scope.volume_slider_max = 1000;
+  $scope.volume_slider_min = 1;
+  $scope.volume_slider_step = 5;
 
   $scope.addDrink = function() {
     $scope.modal.hide();
@@ -45,10 +48,14 @@ angular.module('starter', ['ionic'])
     $scope.refreshDrinks($scope.newDrink());
   };
 
+  $scope.removeDrink = function(index) {
+    $(".drink")[index].remove();
+    $scope.drinks.splice(index, 1);
+  }
+
   $scope.refreshDrinks = function(new_drink){
       $scope.drinks.push(new_drink);
       $scope.drinks.sort(function(a,b){return b.index-a.index});
-      console.log($scope.drinks);
   }
 
   $scope.newDrink = function(){
@@ -56,7 +63,8 @@ angular.module('starter', ['ionic'])
         volume: $scope.data.volume,
         strength: parseFloat($scope.data.strength).toFixed(1),
         quantity: $scope.data.quantity,
-        cost: parseFloat($scope.data.cost).toFixed(2)
+        cost: parseFloat($scope.data.cost).toFixed(2),
+        unit: $scope.data.unit,
     }
     $scope.evaluateDrink(new_drink);
     return new_drink;
@@ -82,6 +90,27 @@ angular.module('starter', ['ionic'])
       }
   }
 
+  $scope.changeUnit = function(unit) {
+      $scope.data.unit = unit;
+      switch(unit){
+          case "l":
+            return $scope.updateUnit(0.1, 10, 0.1, 5);
+          case "cl":
+            return $scope.updateUnit(1, 200, 1, 100);
+          case "oz":
+            return $scope.updateUnit(1, 100, 1, 50);
+          default:
+            return $scope.updateUnit(10, 1000, 10, 500);
+      }
+  }
+
+  $scope.updateUnit = function(min, max, step, value) {
+    $scope.volume_slider_max = max;
+    $scope.volume_slider_min = min;
+    $scope.volume_slider_step = step;
+    $scope.data.volume = value;
+  }
+
   $scope.openDrinks = function() {
     $scope.modal.show()
   }
@@ -93,6 +122,8 @@ angular.module('starter', ['ionic'])
   $scope.$on('$destroy', function() {
     $scope.modal.remove();
   });
+
+  $scope.changeUnit("ml");
 })
 
 .controller('AboutCtrl', function($scope, $ionicModal) {
@@ -116,3 +147,5 @@ angular.module('starter', ['ionic'])
     $scope.modal.remove();
   });
 })
+
+

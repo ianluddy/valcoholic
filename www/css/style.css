@@ -2,12 +2,10 @@
 @font-face {
     font-family: 'vol'; /*a name to be used later*/
     src: url('../fonts/Bebas.ttf');
-    /* src: url('../fonts/Bevan.ttf'); */
 }
 @font-face {
     font-family: 'vol_body';
     src: url('../fonts/PTSans.ttf');
-    /* src: url('../fonts/DroidSans.ttf'); */
 }
 *{
     background-color: #ffd600 !important;
@@ -32,7 +30,7 @@ h4{
     margin-top: 20px;
     margin-left: 5%;
     margin-right: 5%;
-    height: 70%;
+    height: 73%;
     border-bottom: 2px solid;
     overflow: hidden;
 }
@@ -68,7 +66,7 @@ h4{
 #about-wrap{
     text-align: center;
     padding: 20px;
-    font-size: 1.3em;
+    font-size: 1em;
 }
 #about-wrap strong{
     margin-bottom: 10px;
@@ -107,27 +105,31 @@ h4{
 .modal{
   margin-top: 12px;
 }
-.modal ion-content{
+.modal-inner{
     padding: 20px;
-    padding-top: 40px;
-    padding-bottom: 10px;
+    padding-top: 4%;
+    padding-bottom: 5%;
+    font-size: 1.2em;
 }
-.modal ion-content .button-full{
+.modal-inner .button-full{
     border: 1px solid;
 }
 .input-value{
     float: right;
-    font-size: 16px;
-    color: #444;
-    position: relative;
-    top: 6px;
-    right: 15px;
+    position: absolute;
+    right: 7%;
 }
-.input-label{
+.input-name{
     margin-bottom: 4px;
-    z-index: 2;
+    z-index: 4;
     position: relative;
     left: 10px;
+    padding: 3px 10px 3px 0px;
+    width: 100%;
+}
+.input-name-inline{
+    width: 20% !important;
+    display: inline-block;
 }
 .input-group{
     z-index: 1;
@@ -149,10 +151,10 @@ h4{
     z-index: 3;
 }
 .modal-close{
-    position: absolute;
-    top: -40px;
-    right: 10px;
-    font-size: 2.5em;
+    font-size: 2.2em;
+    text-align: right;
+    padding: 6px;
+    margin-bottom: 20px;
 }
 .drink, .placeholder{
     height: 40px;
@@ -163,39 +165,63 @@ h4{
 }
 .drink div, .placeholder div{
     position: relative;
-    top: 50%;
+    top: 51%;
     transform: translateY(-50%);
 }
-#header{
+.header{
     width: 100%;
     height: 29px;
     font-size: 0.8em;
     margin-bottom: 5px;
     border-bottom: 2px solid;
 }
-#header div, .drink div{
+.header div, .drink div{
     display: inline-block;
     float: right;
-    width: 16%;
+    width: 18%;
     text-align: center;
 }
+.radio-wrapper{
+    float: right;
+    text-align: center;
+    position: relative;
+    top: 3px;
+}
+.radio-group{
+    margin-bottom: 35px;
+}
+.radio-wrapper div{
+    display: inline-block;
+    text-align: center;
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    line-height: 43px;
+    border: 3px solid #444;
+    font-size: 15px;
+}
+.radio-wrapper div.selected{
+    background-color: #444 !important;
+    color: #ffd600 !important;
+}
+div.remove{
+    width: 10% !important;
+}
+div.remove i{
+    font-size: 1.5em;
+}
+.alc{
+    display: none !important;
+}
+
 /* responsive */
 
 @media screen and (min-width: 350px) {
-    .alc{
-        display: none !important;
-    }
-    #header div, .drink div{
-        width: 20%;
+    .header div, .drink div{
+        width: 18%;
     }
 }
 @media screen and (max-width: 350px) {
-    .alc{
-        display: none !important;
-    }
-    #header div, .drink div{
-        width: 20%;
-    }
     #about{
         display: none;
     }
@@ -204,8 +230,8 @@ h4{
     .cost{
         display: none !important;
     }
-    #header div, .drink div{
-        width: 25%;
+    .header div, .drink div{
+        width: 22%;
     }
     #footer{
         display: none;
