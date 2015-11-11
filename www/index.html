@@ -43,7 +43,7 @@
     <div class="best">Score</div>
   </div>
   <div id="drink-wrap">
-    <div ng-repeat="drink in drinks" class="card drink animated fadeInRight">
+    <div ng-repeat="drink in data.drinks" class="card drink animated fadeInRight">
       <div class="remove"><i class="icon ion-trash-b" ng-click="removeDrink($index)"></i></div>
       <div class="cost">€ {{drink.cost}}</div>
       <div>x {{drink.quantity}}</div>
@@ -75,10 +75,10 @@
       <div class="input-group radio-group">
         <div class="input-name input-name-inline">Units</div>
         <div class="radio-wrapper">
-          <div ng-class="{selected: data.unit == 'ml'}" ng-click="changeUnit('ml')">ml</div>
-          <div ng-class="{selected: data.unit == 'cl'}" ng-click="changeUnit('cl')">cl</div>
-          <div ng-class="{selected: data.unit == 'l'}" ng-click="changeUnit('l')">l</div>
-          <div ng-class="{selected: data.unit == 'oz'}" ng-click="changeUnit('oz')">oz</div>
+          <div ng-class="{selected: data.unit == 'ml'}" ng-click="setMl()">ml</div>
+          <div ng-class="{selected: data.unit == 'cl'}" ng-click="setCl()">cl</div>
+          <div ng-class="{selected: data.unit == 'l'}" ng-click="setL()">l</div>
+          <div ng-class="{selected: data.unit == 'oz'}" ng-click="setOz()">oz</div>
         </div>
       </div>
       <div class="input-group">
@@ -87,15 +87,15 @@
             <span class="input-value">{{data.volume}} {{data.unit}}</span>
         </div>
         <div class="item range">
-          <i class="icon ion-wineglass"></i>
+          <i class="icon ion-wineglass" ng-click="decrementVolume()"></i>
           <input
             type="range"
             name="volume"
-            min="{{volume_slider_min}}"
-            max="{{volume_slider_max}}"
-            step="{{volume_slider_step}}"
+            min="{{data.sliders.volume.min}}"
+            max="{{data.sliders.volume.max}}"
+            step="{{data.sliders.volume.step}}"
             ng-model="data.volume">
-          <i class="icon ion-beer"></i>
+          <i class="icon ion-beer" ng-click="incrementVolume()"></i>
         </div>
       </div>
       <div class="input-group">
@@ -104,9 +104,9 @@
           <span class="input-value">x {{data.quantity}}</span>
         </div>
         <div class="item range">
-          <i class="icon ion-ios-cart-outline"></i>
+          <i class="icon ion-ios-cart-outline" ng-click="decrementQuantity()"></i>
           <input type="range" name="quantity" min="1" max="50" ng-model="data.quantity">
-          <i class="icon ion-ios-cart"></i>
+          <i class="icon ion-ios-cart" ng-click="incrementQuantity()"></i>
         </div>
       </div>
       <div class="input-group">
@@ -115,9 +115,9 @@
           <span class="input-value">{{data.strength}} %</span>
         </div>
         <div class="item range">
-          <i class="icon ion-ios-flame-outline"></i>
+          <i class="icon ion-ios-flame-outline" ng-click="decrementStrength()"></i>
           <input type="range" name="strength" step="0.2" min="1" max="50" ng-model="data.strength">
-          <i class="icon ion-ios-flame"></i>
+          <i class="icon ion-ios-flame" ng-click="incrementStrength()"></i>
         </div>
       </div>
       <div class="input-group">
@@ -126,9 +126,9 @@
           <span class="input-value">€ {{data.cost}}</span>
         </div>
         <div class="item range">
-          <i class="icon ion-android-happy"></i>
+          <i class="icon ion-android-happy" ng-click="decrementCost()"></i>
           <input type="range" name="cost" step="0.1" min="0.1" max="50" ng-model="data.cost">
-          <i class="icon ion-android-sad"></i>
+          <i class="icon ion-android-sad" ng-click="incrementCost()"></i>
         </div>
       </div>
       <button id="add" class="button button-outline button-dark button-full" ng-click="addDrink()">
