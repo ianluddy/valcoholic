@@ -1,168 +1,172 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport"
-        content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-  <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
 
-  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/animate.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
 
-  <!-- ionic/angularjs js -->
-  <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-  <!-- cordova script (this will be a 404 during development) -->
-  <script src="cordova.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
 
-  <!-- jquery -->
-  <script src="js/jquery.min.js"></script>
+    <!-- jquery -->
+    <script src="js/jquery.min.js"></script>
 
-  <!-- your app's js -->
-  <script src="js/app.js"></script>
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
 </head>
 <body id="volc" ng-app="starter">
 <div id="title-wrap" class="animated fadeInDown">
-  <div id="title-inner">
-    <h1 id="title">Volcoholic</h1>
-    <span class="ion-wineglass"></span>
-    <span class="ion-beer"></span>
-    <span class="ion-android-bar"></span>
-    <span class="ion-calculator"></span>
-  </div>
+    <div id="title-inner">
+        <h1 id="title">Volcoholic</h1>
+        <span class="ion-wineglass"></span>
+        <span class="ion-beer"></span>
+        <span class="ion-android-bar"></span>
+        <span class="ion-calculator"></span>
+    </div>
 </div>
 <div id="drinks" ng-controller="DrinkCtrl" class="animated fadeInLeft">
-  <div class="header">
-    <div class="remove">Del</div>
-    <div class="cost">Cost</div>
-    <div class="quantity">Quantity</div>
-    <div class="strength">Strength</div>
-    <div class="volume">Volume</div>
-    <div class="alc">Alcohol</div>
-    <div class="best">Score</div>
-  </div>
-  <div id="drink-wrap">
-    <div ng-repeat="drink in data.drinks" class="card drink animated fadeInRight">
-      <div class="remove"><i class="icon ion-trash-b" ng-click="removeDrink($index)"></i></div>
-      <div class="cost">€ {{drink.cost}}</div>
-      <div>x {{drink.quantity}}</div>
-      <div>{{drink.strength}} %</div>
-      <div>{{drink.volume}} {{drink.unit}}</div>
-      <div class="alc">{{drink.alc}} ml</div>
-      <div>{{drink.index}}</div>
+    <div class="header">
+        <div class="remove">Del</div>
+        <div class="cost">Cost</div>
+        <div class="quantity">Quantity</div>
+        <div class="strength">Strength</div>
+        <div class="volume">Volume</div>
+        <div class="alc">Alcohol</div>
+        <div class="best">Score</div>
     </div>
-    <div class="placeholder card" ng-click="openDrinks()">
-      <div>Add a Drink</div>
+    <div id="drink-wrap">
+        <div ng-repeat="drink in data.drinks" class="card drink animated" ng-class="{fadeInRight: drink.newest==true}">
+            <div class="remove"><i class="icon ion-trash-b" ng-click="removeDrink($index)"></i></div>
+            <div class="cost">{{drink.cost | currency:"€ "}}</div>
+            <div>x {{drink.quantity}}</div>
+            <div>{{drink.strength | number:1}} %</div>
+            <div>{{drink.volume}} {{drink.unit}}</div>
+            <div class="alc">{{drink.alc}} ml</div>
+            <div>{{drink.index}}</div>
+        </div>
+        <div class="placeholder card" ng-click="openDrinks()">
+            <div>Add a Drink</div>
+        </div>
     </div>
-  </div>
 </div>
 <div id="footer" ng-controller="AboutCtrl" class="animated fadeInUp">
-  <div id="info">
-    Score = Alcohol in Mils / Cost
-  </div>
-  <div id="about" ng-click="openAbout()">
-    About
-  </div>
+    <div id="info">
+        Score = Alcohol in Mils / Cost
+    </div>
+    <div id="about" ng-click="openAbout()">
+        About
+    </div>
 </div>
 
 <script id="drink-modal.html" type="text/ng-template">
-  <div class="modal">
-    <ion-content class="modal-inner">
-      <div class="modal-close">
-        <i class="icon ion-android-close" ng-click="closeDrinks()"></i>
-      </div>
-      <div class="input-group radio-group">
-        <div class="input-name input-name-inline">Units</div>
-        <div class="radio-wrapper">
-          <div ng-class="{selected: data.unit == 'ml'}" ng-click="setMl()">ml</div>
-          <div ng-class="{selected: data.unit == 'cl'}" ng-click="setCl()">cl</div>
-          <div ng-class="{selected: data.unit == 'l'}" ng-click="setL()">l</div>
-          <div ng-class="{selected: data.unit == 'oz'}" ng-click="setOz()">oz</div>
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="input-name">
-            Volume
-            <span class="input-value">{{data.volume}} {{data.unit}}</span>
-        </div>
-        <div class="item range">
-          <i class="icon ion-wineglass" ng-click="decrementVolume()"></i>
-          <input
-            type="range"
-            name="volume"
-            min="{{data.sliders.volume.min}}"
-            max="{{data.sliders.volume.max}}"
-            step="{{data.sliders.volume.step}}"
-            ng-model="data.volume">
-          <i class="icon ion-beer" ng-click="incrementVolume()"></i>
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="input-name">
-          Quantity
-          <span class="input-value">x {{data.quantity}}</span>
-        </div>
-        <div class="item range">
-          <i class="icon ion-ios-cart-outline" ng-click="decrementQuantity()"></i>
-          <input type="range" name="quantity" min="1" max="50" ng-model="data.quantity">
-          <i class="icon ion-ios-cart" ng-click="incrementQuantity()"></i>
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="input-name">
-          Strength
-          <span class="input-value">{{data.strength}} %</span>
-        </div>
-        <div class="item range">
-          <i class="icon ion-ios-flame-outline" ng-click="decrementStrength()"></i>
-          <input type="range" name="strength" step="0.2" min="1" max="50" ng-model="data.strength">
-          <i class="icon ion-ios-flame" ng-click="incrementStrength()"></i>
-        </div>
-      </div>
-      <div class="input-group">
-        <div class="input-name">
-          Cost
-          <span class="input-value">€ {{data.cost}}</span>
-        </div>
-        <div class="item range">
-          <i class="icon ion-android-happy" ng-click="decrementCost()"></i>
-          <input type="range" name="cost" step="0.1" min="0.1" max="50" ng-model="data.cost">
-          <i class="icon ion-android-sad" ng-click="incrementCost()"></i>
-        </div>
-      </div>
-      <button id="add" class="button button-outline button-dark button-full" ng-click="addDrink()">
-        Add
-      </button>
-    </ion-content>
-  </div>
+    <div class="modal">
+        <ion-content class="modal-inner">
+            <div class="modal-close">
+                <i class="icon ion-android-close" ng-click="closeDrinks()"></i>
+            </div>
+            <div class="input-group radio-group">
+                <div class="input-name input-name-inline">Units</div>
+                <div class="radio-wrapper">
+                    <div ng-class="{selected: data.unit == 'ml'}" ng-click="setMl()">ml</div>
+                    <div ng-class="{selected: data.unit == 'cl'}" ng-click="setCl()">cl</div>
+                    <div ng-class="{selected: data.unit == 'l'}" ng-click="setL()">l</div>
+                    <div ng-class="{selected: data.unit == 'oz'}" ng-click="setOz()">oz</div>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-name">
+                    Volume
+                    <span class="input-value">{{data.volume}} {{data.unit}}</span>
+                </div>
+                <div class="item range">
+                    <i class="icon ion-wineglass" ng-click="decrementVolume()"></i>
+                    <input
+                            type="range"
+                            name="volume"
+                            min="{{data.sliders.volume.min}}"
+                            max="{{data.sliders.volume.max}}"
+                            step="{{data.sliders.volume.step}}"
+                            ng-model="data.volume">
+                    <i class="icon ion-beer" ng-click="incrementVolume()"></i>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-name">
+                    Quantity
+                    <span class="input-value">x {{data.quantity}}</span>
+                </div>
+                <div class="item range">
+                    <i class="icon ion-ios-cart-outline" ng-click="decrementQuantity()"></i>
+                    <input type="range" name="quantity" min="1" max="50" ng-model="data.quantity">
+                    <i class="icon ion-ios-cart" ng-click="incrementQuantity()"></i>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-name">
+                    Strength
+                    <span class="input-value">{{data.strength | number:1}} %</span>
+                </div>
+                <div class="item range">
+                    <i class="icon ion-ios-flame-outline" ng-click="decrementStrength()"></i>
+                    <input type="range" name="strength" step="0.2" min="1" max="50" ng-model="data.strength">
+                    <i class="icon ion-ios-flame" ng-click="incrementStrength()"></i>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-name">
+                    Cost
+                    <span class="input-value">{{data.cost | currency:"€ "}}</span>
+                </div>
+                <div class="item range">
+                    <i class="icon ion-android-happy" ng-click="decrementCost()"></i>
+                    <input type="range" name="cost" step="0.1" min="0.1" max="50" ng-model="data.cost">
+                    <i class="icon ion-android-sad" ng-click="incrementCost()"></i>
+                </div>
+            </div>
+            <div id="information">
+                <i class="icon ion-information-circled"></i>
+                Tap icons for small inc/dec
+            </div>
+            <button id="add" class="button button-outline button-dark button-full" ng-click="addDrink()">
+                Add
+            </button>
+        </ion-content>
+    </div>
 </script>
 
 <script id="about-modal.html" type="text/ng-template">
-  <div class="modal">
-    <ion-content class="modal-inner">
-      <div class="modal-close" ng-click="closeAbout()">
-        <i class="icon ion-android-close"></i>
-      </div>
-      <div id="about-wrap">
-        <div>
-          <img src="img/me.png"/>
-        </div>
-        <div class="about-section">
-          <strong><a href="http://www.ianluddy.com"> IanLuddy.com </a></strong>
-        </div>
-        <div class="about-section">
-          Thanks for downloading Volcoholic! If you have any feedback you can contact me via ianluddy.com
-        </div>
-        <div class="about-section">
-            <div class="about-header"><strong>Resources</strong></div>
-            <div>Ionic Framework</div>
-            <div>AngularJS</div>
-            <div>Bootstrap</div>
-        </div>
-      </div>
-    </ion-content>
-  </div>
+    <div class="modal">
+        <ion-content class="modal-inner">
+            <div class="modal-close" ng-click="closeAbout()">
+                <i class="icon ion-android-close"></i>
+            </div>
+            <div id="about-wrap">
+                <div>
+                    <img src="img/me.png"/>
+                </div>
+                <div class="about-section">
+                    <strong><a href="http://www.ianluddy.com"> IanLuddy.com </a></strong>
+                </div>
+                <div class="about-section">
+                    Thanks for downloading Volcoholic! If you have any feedback you can contact me via ianluddy.com
+                </div>
+                <div class="about-section">
+                    <div class="about-header"><strong>Resources</strong></div>
+                    <div>Ionic Framework</div>
+                    <div>AngularJS</div>
+                    <div>Bootstrap</div>
+                </div>
+            </div>
+        </ion-content>
+    </div>
 </script>
 
 </body>

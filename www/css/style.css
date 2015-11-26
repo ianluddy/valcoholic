@@ -208,13 +208,27 @@ div.remove{
     width: 10% !important;
 }
 div.remove i{
-    font-size: 1.5em;
+    font-size: 1.7em;
+    position: relative;
+    left: 4px;
 }
 .alc{
     display: none !important;
 }
 .range .icon{
     font-size: 1.6em !important;
+    padding: 10px;
+    z-index: 100;
+    position: relative;
+    right: 5px;
+}
+#information{
+    padding: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+#information i{
+    font-size: 1.2em;
 }
 /* responsive */
 
@@ -244,6 +258,11 @@ div.remove i{
         display: none;
     }
     #title-inner span{
+        display: none;
+    }
+}
+@media screen and (max-height: 580px) {
+    #information{
         display: none;
     }
 }

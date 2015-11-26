@@ -15,6 +15,9 @@ angular.module('starter', ['ionic'])
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+            if(navigator && navigator.splashscreen){
+                navigator.splashscreen.hide();
+            }
         });
     })
 
@@ -25,7 +28,7 @@ angular.module('starter', ['ionic'])
             animation: 'slide-in-up'
         }).then(function (modal) {
             $scope.modal = modal
-        })
+        });
 
         $scope.data = {
             "volume": 500,
@@ -56,7 +59,7 @@ angular.module('starter', ['ionic'])
                     "step": 1
                 }
             }
-        }
+        };
 
         $scope.addDrink = function () {
             $scope.modal.hide();
@@ -66,33 +69,39 @@ angular.module('starter', ['ionic'])
         $scope.removeDrink = function (index) {
             $(".drink")[index].remove();
             $scope.data.drinks.splice(index, 1);
-        }
+        };
 
         $scope.refreshDrinks = function (new_drink) {
             $scope.data.drinks.push(new_drink);
             $scope.data.drinks.sort(function (a, b) {
                 return b.index - a.index
             });
-        }
+            setTimeout(function(){
+                for( var i in $scope.data.drinks ){
+                    $scope.data.drinks[i].newest = false;
+                }
+            }, 1200);
+        };
 
         $scope.newDrink = function () {
             var new_drink = {
-                volume: $scope.data.volume,
+                volume: parseFloat($scope.data.volume),
                 strength: parseFloat($scope.data.strength).toFixed(1),
-                quantity: $scope.data.quantity,
+                quantity: parseInt($scope.data.quantity),
                 cost: parseFloat($scope.data.cost).toFixed(2),
-                unit: $scope.data.unit
-            }
+                unit: $scope.data.unit,
+                newest: true
+            };
             $scope.evaluateDrink(new_drink);
             return new_drink;
-        }
+        };
 
         $scope.evaluateDrink = function (drink) {
             drink.mils = $scope.normaliseVolume(drink.unit, drink.volume, drink.quantity);
             var total_alc = (drink.mils / 100) * drink.strength;
             drink.alc = parseFloat(total_alc).toFixed(2);
             drink.index = parseFloat(total_alc / drink.cost).toFixed(2);
-        }
+        };
 
         $scope.normaliseVolume = function (unit, volume, quantity) {
             switch (unit) {
@@ -105,7 +114,7 @@ angular.module('starter', ['ionic'])
                 default:
                     return volume * quantity;
             }
-        }
+        };
 
         $scope.setMl = function(){
             $scope.updateVolumeUnit(10, 1000, 10, 500, "ml");
@@ -129,47 +138,78 @@ angular.module('starter', ['ionic'])
             $scope.data.sliders.volume.step = step;
             $scope.data.volume = value;
             $scope.data.unit = unit;
-            $scope.decrementVolume();
-            $scope.incrementVolume();
         };
 
         $scope.incrementVolume = function () {
-            $scope.data.volume = $scope.incrementUnit($scope.data.volume, $scope.data.sliders.volume.max, $scope.data.sliders.volume.step);
+            $scope.data.volume = $scope.incrementUnit(
+                $scope.data.volume,
+                $scope.data.sliders.volume.max,
+                $scope.data.sliders.volume.step
+            );
         };
 
         $scope.decrementVolume = function () {
-            $scope.data.volume = $scope.decrementUnit($scope.data.volume, $scope.data.sliders.volume.min, $scope.data.sliders.volume.step);
+            $scope.data.volume = $scope.decrementUnit(
+                $scope.data.volume,
+                $scope.data.sliders.volume.min,
+                $scope.data.sliders.volume.step
+            );
         };
 
         $scope.incrementQuantity = function () {
-            $scope.data.quantity = $scope.incrementUnit($scope.data.quantity, $scope.data.sliders.quantity.max, $scope.data.sliders.quantity.step);
+            $scope.data.quantity = $scope.incrementUnit(
+                $scope.data.quantity,
+                $scope.data.sliders.quantity.max,
+                $scope.data.sliders.quantity.step
+            );
         };
 
         $scope.decrementQuantity = function () {
-            $scope.data.quantity = $scope.decrementUnit($scope.data.quantity, $scope.data.sliders.quantity.min, $scope.data.sliders.quantity.step);
+            $scope.data.quantity = $scope.decrementUnit(
+                $scope.data.quantity,
+                $scope.data.sliders.quantity.min,
+                $scope.data.sliders.quantity.step
+            );
         };
 
         $scope.incrementCost = function () {
-            $scope.data.cost = $scope.incrementUnit($scope.data.cost, $scope.data.sliders.cost.max, $scope.data.sliders.cost.step);
+            $scope.data.cost = $scope.incrementUnit(
+                $scope.data.cost,
+                $scope.data.sliders.cost.max,
+                $scope.data.sliders.cost.step
+            );
         };
 
         $scope.decrementCost = function () {
-            $scope.data.cost = $scope.decrementUnit($scope.data.cost, $scope.data.sliders.cost.min, $scope.data.sliders.cost.step);
+            $scope.data.cost = $scope.decrementUnit(
+                $scope.data.cost,
+                $scope.data.sliders.cost.min,
+                $scope.data.sliders.cost.step
+            );
         };
 
         $scope.incrementStrength = function () {
-            $scope.data.strength = $scope.incrementUnit($scope.data.strength, $scope.data.sliders.strength.max, $scope.data.sliders.strength.step);
+            $scope.data.strength = $scope.incrementUnit(
+                $scope.data.strength,
+                $scope.data.sliders.strength.max,
+                $scope.data.sliders.strength.step
+            );
         };
 
         $scope.decrementStrength = function () {
-            $scope.data.strength = $scope.decrementUnit($scope.data.strength, $scope.data.sliders.strength.min, $scope.data.sliders.strength.step);
+            $scope.data.strength = $scope.decrementUnit(
+                $scope.data.strength,
+                $scope.data.sliders.strength.min,
+                $scope.data.sliders.strength.step
+            );
         };
 
         $scope.incrementUnit = function (unit, max, step) {
-            if (unit + step > max) {
+            var float_unit = parseFloat(unit);
+            if (float_unit + step > max) {
                 return $scope.round(max);
             } else {
-                return $scope.round(unit + step);
+                return $scope.round(float_unit + step);
             };
         };
 
@@ -177,12 +217,12 @@ angular.module('starter', ['ionic'])
             if (unit - step < min) {
                 return $scope.round(min);
             } else {
-                return $scope.round(unit - step);
-            };
+                return $scope.round(parseFloat(unit) - step);
+            }
         };
 
         $scope.round = function (value) {
-            return Math.round(value * 10) / 10;
+            return Math.round(parseFloat(value) * 10) / 10;
         };
 
         $scope.openDrinks = function () {
@@ -207,11 +247,11 @@ angular.module('starter', ['ionic'])
             animation: 'slide-in-up'
         }).then(function (modal) {
             $scope.modal = modal
-        })
+        });
 
         $scope.openAbout = function () {
             $scope.modal.show()
-        }
+        };
 
         $scope.closeAbout = function () {
             $scope.modal.hide();
@@ -220,6 +260,6 @@ angular.module('starter', ['ionic'])
         $scope.$on('$destroy', function () {
             $scope.modal.remove();
         });
-    })
+    });
 
 
