@@ -5,19 +5,11 @@ Just enter the details of the beverages on offer and the app will sort them base
 
 Maximum liver damage guaranteed!
 
-#### Site
-
 https://play.google.com/store/apps/details?id=iandroid.volcoholic
 
 #### Stack
 
 * [Android](http://developer.android.com/)
-* [Phonegap](http://phonegap.com/)
-
-#### Screenshots
-
-![Alt text](https://github.com/ianluddy/Volcoholic/blob/master/screenshots/volcoholic1.png?raw=true)
-***
-
-![Alt text](https://github.com/ianluddy/Volcoholic/blob/master/screenshots/volcoholic.png?raw=true)
-***
+* [Ionic Framework](http://ionicframework.com/)
+* [AngularJS](http://angularjs.org/)
+* [Bootstrap](http://getbootstrap.com/)
