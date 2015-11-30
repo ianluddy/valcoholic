@@ -1,11 +1,9 @@
-## Volcoholic
+## Valcoholic
 
 Alcoholic beverage comparison app designed to help you get the maximum amount of alcohol for your money. 
-Just enter the details of the beverages on offer and the app will sort them based on their strength, volume and price.
+Just enter the details of the beverages on offer and the app will sort them based on their alcohol to cost ratio.
 
-Maximum liver damage guaranteed!
-
-https://play.google.com/store/apps/details?id=iandroid.volcoholic
+https://play.google.com/store/apps/details?id=iandroid.valcoholic
 
 #### Stack
 
