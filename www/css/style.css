@@ -229,6 +229,8 @@ div.remove i{
 }
 #information i{
     font-size: 1.2em;
+    position: relative;
+    top: 2px;
 }
 /* responsive */
 

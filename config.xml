@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.volcoholic655481" version="2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Volcoholic</name>
+<widget id="com.ionicframework.valcoholic352895" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Valcoholic</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Alcoholic beverage comparison
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="ianluddy@gmail.com" href="http://ianluddy.com">
+      IanLuddy.com
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -14,7 +14,6 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <preference name="orientation" value="portrait" />
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="AutoHideSplashScreen" value="false" />
